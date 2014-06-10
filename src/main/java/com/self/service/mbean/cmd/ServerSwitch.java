@@ -2,71 +2,85 @@ package com.self.service.mbean.cmd;
 
 import org.jboss.system.ServiceMBeanSupport;
 
+import com.self.service.util.log.LogUtil;
+
 public class ServerSwitch extends ServiceMBeanSupport
 	implements ServerSwitchMBean{
 
-	private String[] servers = new String[2];
-	private byte activeServer = 0;
-	private final char SEPERATOR='|';
-	private final String REGEX_SEPERATOR="\\"+SEPERATOR;
+	private final String CLASS_NAME = "com.self.service.mbean.cmd.ServerSwitch";
+	
+	private byte PRIMARY = 0;
+	private byte SECONDARY = 1;
+	
+	private String primaryServer="";
+	private String secondaryServer="";
+	private byte activeServer = PRIMARY;
 
 	@Override
 	public void switchServer() {
-		setActiveServer(
-				getSwitchedServer()==0?
-						(byte)1:
-						(byte)0);
+		String holder = primaryServer;
+		primaryServer = secondaryServer;
+		secondaryServer = holder;
+		activeServer = activeServer==PRIMARY?
+				SECONDARY:PRIMARY;
 	}
 
-	@Override
-	public String getServers() {
-		String formattedValue =  String.format("%s%c%s", 
-				servers[0].toString(),
-				SEPERATOR,
-				servers[1].toString());
-		return formattedValue;
-	}
-
-	@Override
-	public void setServers(String servers) {
-		
-		//made to control jboss shutdown and clean up.
-		if(servers == null || this.servers == null){
-			return;
-		}
-		
-		String[] splittedServer = servers.split(REGEX_SEPERATOR);
-		
-		this.servers[0] = splittedServer[0];
-		
-		this.servers[1] = splittedServer.length == 1?
-				splittedServer[0]:
-				splittedServer[1];
-	}
-
-	private int getSwitchedServer() {
-		return servers.length == 1?
-				0:
-				activeServer;
-	}
-
-	public void setActiveServer(byte activeServer) {
-		this.activeServer = activeServer;
-	}
-
-	// The lifecycle
+	// The life cycle
 	public void startService() throws Exception
    	{
-	   System.out.println("Starting with server="+getServers());
+		LogUtil.getInstance(CLASS_NAME).info("Starting with server="+getActiveServers());
    	}
    
 	public void stopService()
    	{
-   		System.out.println("End with server="+getServers());
+		LogUtil.getInstance(CLASS_NAME).info("End with server="+getActiveServers());
    	}
-
+	
 	@Override
-	public String getActiveServer() {
-		return servers[getSwitchedServer()];
+	public String getActiveServers(){
+		return String.format("Primary:%s[%s],Secondary:%s[%s]",
+				primaryServer, getActive(PRIMARY),
+				secondaryServer, getActive(SECONDARY));
+	}
+
+	private String getActive(byte serverHierarchy) {
+		
+		return serverHierarchy == activeServer? 
+				"ACTIVE":
+					"HALT";
+	}
+	
+	@Override
+	public void setPrimaryServer(String server){
+		if(server == null)
+			return;
+		primaryServer = server;
+	}
+	
+	@Override
+	public String getPrimaryServer(){
+		return primaryServer;
+	}
+	
+	@Override
+	public void setSecondaryServer(String server){
+		if(server == null)
+			return;
+		secondaryServer = server;
+	}
+	
+	@Override
+	public String getSecondaryServer(){
+		return secondaryServer;
+	}
+	
+	@Override
+	public void activatePrimaryServer(){
+		activeServer = PRIMARY;
+	}
+	
+	@Override
+	public void activateSecondaryServer(){
+		activeServer = SECONDARY;
 	}
 }

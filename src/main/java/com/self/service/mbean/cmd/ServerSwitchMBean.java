@@ -4,7 +4,11 @@ import org.jboss.system.ServiceMBean;
 
 public interface ServerSwitchMBean extends ServiceMBean {
 	public void switchServer();
-	public String getServers();
-	public void setServers(String servers);
-	public String getActiveServer();
+	public String getActiveServers();
+	public void setPrimaryServer(String server);
+	public String getPrimaryServer();
+	public void setSecondaryServer(String server);
+	public String getSecondaryServer();
+	public void activatePrimaryServer();
+	public void activateSecondaryServer();
 }
