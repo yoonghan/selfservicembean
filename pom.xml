@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.jom.jaring</groupId>
   <artifactId>selfservicembean</artifactId>
   <name>selfservicembean</name>
   <description>MBean services</description>
@@ -13,6 +12,7 @@
   
   <properties>
   	<jjutility.version>1.0.0</jjutility.version>
+  	<self.service.log.version>1.0.0</self.service.log.version>
   	<self.service.db.version>1.0.0</self.service.db.version>
   </properties>
   
@@ -30,13 +30,19 @@
 		<scope>provided</scope>
 	</dependency>
 	<dependency>
-		<groupId>com.jom.jaring</groupId>
+		<groupId>jom.jaring</groupId>
 		<artifactId>jjutility</artifactId>
 		<version>${jjutility.version}</version>
 		<scope>provided</scope>
 	</dependency>
 	<dependency>
-	  <groupId>com.jom.jaring</groupId>
+		<groupId>jom.jaring</groupId>
+		<artifactId>selfservicelogging</artifactId>
+		<version>${self.service.log.version}</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+	  <groupId>jom.jaring</groupId>
       <artifactId>selfservicedb</artifactId>
       <version>${self.service.db.version}</version>
       <type>jar</type>

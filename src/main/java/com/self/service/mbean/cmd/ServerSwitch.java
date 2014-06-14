@@ -2,7 +2,7 @@ package com.self.service.mbean.cmd;
 
 import org.jboss.system.ServiceMBeanSupport;
 
-import com.self.service.util.log.LogUtil;
+import com.self.service.logging.log.LogUtil;
 
 public class ServerSwitch extends ServiceMBeanSupport
 	implements ServerSwitchMBean{
@@ -28,19 +28,26 @@ public class ServerSwitch extends ServiceMBeanSupport
 	// The life cycle
 	public void startService() throws Exception
    	{
-		LogUtil.getInstance(CLASS_NAME).info("Starting with server="+getActiveServers());
+		LogUtil.getInstance(CLASS_NAME).info("Starting with server="+getServers());
    	}
    
 	public void stopService()
    	{
-		LogUtil.getInstance(CLASS_NAME).info("End with server="+getActiveServers());
+		LogUtil.getInstance(CLASS_NAME).info("End with server="+getServers());
    	}
 	
 	@Override
-	public String getActiveServers(){
+	public String getServers(){
 		return String.format("Primary:%s[%s],Secondary:%s[%s]",
 				primaryServer, getActive(PRIMARY),
 				secondaryServer, getActive(SECONDARY));
+	}
+	
+	@Override
+	public String getActiveServer(){
+		return activeServer==PRIMARY?
+				getPrimaryServer():
+				getSecondaryServer();
 	}
 
 	private String getActive(byte serverHierarchy) {

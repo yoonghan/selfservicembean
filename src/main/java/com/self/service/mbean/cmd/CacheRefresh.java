@@ -8,7 +8,7 @@ import com.self.care.store.jdbi.caches.ImageCache;
 import com.self.care.store.jdbi.caches.ImageCategoryCache;
 import com.self.care.store.jdbi.caches.ImageTagCache;
 import com.self.care.store.jdbi.caches.TagCache;
-import com.self.service.util.log.LogUtil;
+import com.self.service.logging.log.LogUtil;
 
 public class CacheRefresh extends ServiceMBeanSupport
 	implements CacheRefreshMBean {
@@ -64,4 +64,9 @@ public class CacheRefresh extends ServiceMBeanSupport
    	{
 		LogUtil.getInstance(CLASS_NAME).info("Ending refresher");
    	}
+	
+	public void destroy(){
+		CategoryCache.getInstance().stopRecordRefresher();
+		TagCache.getInstance().stopRecordRefresher();
+	}
 }

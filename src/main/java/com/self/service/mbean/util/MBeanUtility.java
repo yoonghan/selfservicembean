@@ -8,8 +8,8 @@ import javax.management.ObjectName;
 
 import org.jboss.mx.util.MBeanServerLocator;
 
+import com.self.service.logging.log.LogUtil;
 import com.self.service.mbean.cmd.ServerSwitchMBean;
-import com.self.service.util.log.LogUtil;
 
 public class MBeanUtility {
 
@@ -63,8 +63,7 @@ public class MBeanUtility {
 		
 		if(obj != null){
 			ServerSwitchMBean serverSwitch = (ServerSwitchMBean)obj;
-			serverSwitch.switchServer();
-			activeServer = serverSwitch.getActiveServers();
+			activeServer = serverSwitch.getActiveServer();
 			LogUtil.getInstance(CLASS_NAME).info("Server Available:"+activeServer);
 		}else{
 			LogUtil.getInstance(CLASS_NAME).error("No server Available");
