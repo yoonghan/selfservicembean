@@ -18,6 +18,7 @@ public class LogMonitor extends ServiceMBeanSupport
 	
 	public void destroy() {
 		logSchedule.stopScheduler();
+		logSchedule.shutdownScheduler();
 		super.destroy();
 	}
 

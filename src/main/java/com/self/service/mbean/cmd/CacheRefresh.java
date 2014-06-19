@@ -7,6 +7,8 @@ import com.self.care.store.jdbi.caches.EnumCountryCache;
 import com.self.care.store.jdbi.caches.ImageCache;
 import com.self.care.store.jdbi.caches.ImageCategoryCache;
 import com.self.care.store.jdbi.caches.ImageTagCache;
+import com.self.care.store.jdbi.caches.MenuCache;
+import com.self.care.store.jdbi.caches.MenuListCache;
 import com.self.care.store.jdbi.caches.TagCache;
 import com.self.service.logging.log.LogUtil;
 
@@ -68,5 +70,11 @@ public class CacheRefresh extends ServiceMBeanSupport
 	public void destroy(){
 		CategoryCache.getInstance().stopRecordRefresher();
 		TagCache.getInstance().stopRecordRefresher();
+	}
+
+	@Override
+	public void refreshMenu() {
+		MenuCache.getInstance().refreshCache();
+		MenuListCache.getInstance().refreshCache();
 	}
 }

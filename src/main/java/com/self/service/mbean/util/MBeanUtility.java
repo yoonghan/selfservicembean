@@ -64,7 +64,6 @@ public class MBeanUtility {
 		if(obj != null){
 			ServerSwitchMBean serverSwitch = (ServerSwitchMBean)obj;
 			activeServer = serverSwitch.getActiveServer();
-			LogUtil.getInstance(CLASS_NAME).info("Server Available:"+activeServer);
 		}else{
 			LogUtil.getInstance(CLASS_NAME).error("No server Available");
 		}
