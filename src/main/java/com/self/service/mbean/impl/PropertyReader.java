@@ -42,7 +42,6 @@ class PropertyReader {
 	
 	public String getProperty(String name){
 		String propValue = propFile.getProperty(name, "");
-		System.out.println(String.format("%s=%s",name,propValue));
 		return propValue;
 	}
 }

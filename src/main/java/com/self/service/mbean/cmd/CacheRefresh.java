@@ -10,12 +10,13 @@ import com.self.care.store.jdbi.caches.ImageTagCache;
 import com.self.care.store.jdbi.caches.MenuCache;
 import com.self.care.store.jdbi.caches.MenuListCache;
 import com.self.care.store.jdbi.caches.TagCache;
-import com.self.service.logging.log.LogUtil;
+import com.self.service.logging.impl.Log;
+import com.self.service.logging.log.LogFactory;
 
 public class CacheRefresh extends ServiceMBeanSupport
 	implements CacheRefreshMBean {
 
-	private final String CLASS_NAME = "com.self.service.mbean.cmd.CacheRefresh";
+	private final Log log = LogFactory.getLogger("com.self.service.mbean.cmd.CacheRefresh");
 	
 	@Override
 	public String getName() {
@@ -59,12 +60,12 @@ public class CacheRefresh extends ServiceMBeanSupport
 	// The lifecycle
 	public void startService() throws Exception
    	{
-		LogUtil.getInstance(CLASS_NAME).info("Starting refresher");
+		log.info("Starting refresher");
    	}
    
 	public void stopService()
    	{
-		LogUtil.getInstance(CLASS_NAME).info("Ending refresher");
+		log.info("Ending refresher");
    	}
 	
 	public void destroy(){

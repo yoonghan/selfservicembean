@@ -2,13 +2,14 @@ package com.self.service.mbean.cmd;
 
 import org.jboss.system.ServiceMBeanSupport;
 
-import com.self.service.logging.log.LogUtil;
+import com.self.service.logging.impl.Log;
+import com.self.service.logging.log.LogFactory;
 import com.self.service.logging.monitor.LogMonitorService;
 
 public class LogMonitor extends ServiceMBeanSupport
 	implements LogMonitorMBean {
 
-	private final String CLASS_NAME = "com.self.service.mbean.cmd.LogEmail";
+	private final Log log = LogFactory.getLogger("com.self.service.mbean.cmd.LogEmail");
 	
 	private LogMonitorService logSchedule = LogMonitorService.getInstance();
 	
@@ -25,13 +26,13 @@ public class LogMonitor extends ServiceMBeanSupport
 	// The lifecycle
 	public void startService() throws Exception
    	{
-		LogUtil.getInstance(CLASS_NAME).info("Starting logging monitor");
+		log.info("Starting logging monitor");
 		startScheduler();
    	}
    
 	public void stopService()
    	{
-		LogUtil.getInstance(CLASS_NAME).info("Stop logging monitor");
+		log.info("Stop logging monitor");
 		stopScheduler();
    	}
 

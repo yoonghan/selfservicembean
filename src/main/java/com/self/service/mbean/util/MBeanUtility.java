@@ -8,13 +8,14 @@ import javax.management.ObjectName;
 
 import org.jboss.mx.util.MBeanServerLocator;
 
-import com.self.service.logging.log.LogUtil;
+import com.self.service.logging.impl.Log;
+import com.self.service.logging.log.LogFactory;
 import com.self.service.mbean.cmd.ServerSwitchMBean;
 
 public class MBeanUtility {
 
 	private final int DEFAULT_UTILITIES_AVAILABLE=1;
-	private final String CLASS_NAME="com.self.service.mbean.util.MBeanUtility";
+	private final Log log = LogFactory.getLogger("com.self.service.mbean.util.MBeanUtility");
 	
 	HashMap<String, Object> utilityBelt = new HashMap<String, Object>(DEFAULT_UTILITIES_AVAILABLE);
 	
@@ -46,7 +47,7 @@ public class MBeanUtility {
 		
 			
 		}catch(Exception e){
-			LogUtil.getInstance(CLASS_NAME).error("Unable to call mbean.", e);
+			log.error("Unable to call mbean.", e);
 			e.printStackTrace();
 		}
 		return serverSwitch;
@@ -65,7 +66,7 @@ public class MBeanUtility {
 			ServerSwitchMBean serverSwitch = (ServerSwitchMBean)obj;
 			activeServer = serverSwitch.getActiveServer();
 		}else{
-			LogUtil.getInstance(CLASS_NAME).error("No server Available");
+			log.error("No server Available");
 		}
 		
 		return activeServer;
