@@ -1,9 +1,9 @@
-package com.self.service.mbean.cmd;
+package com.jaring.jom.mbean.cmd;
 
 import org.jboss.system.ServiceMBeanSupport;
 
-import com.self.service.logging.impl.Log;
-import com.self.service.logging.log.LogFactory;
+import com.jaring.jom.logging.impl.Log;
+import com.jaring.jom.logging.log.LogFactory;
 
 public class ServerSwitch extends ServiceMBeanSupport
 	implements ServerSwitchMBean{

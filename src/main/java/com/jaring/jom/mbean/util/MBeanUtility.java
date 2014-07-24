@@ -1,4 +1,4 @@
-package com.self.service.mbean.util;
+package com.jaring.jom.mbean.util;
 
 import java.util.HashMap;
 
@@ -8,14 +8,14 @@ import javax.management.ObjectName;
 
 import org.jboss.mx.util.MBeanServerLocator;
 
-import com.self.service.logging.impl.Log;
-import com.self.service.logging.log.LogFactory;
-import com.self.service.mbean.cmd.ServerSwitchMBean;
+import com.jaring.jom.logging.impl.Log;
+import com.jaring.jom.logging.log.LogFactory;
+import com.jaring.jom.mbean.cmd.ServerSwitchMBean;
 
 public class MBeanUtility {
 
 	private final int DEFAULT_UTILITIES_AVAILABLE=1;
-	private final Log log = LogFactory.getLogger("com.self.service.mbean.util.MBeanUtility");
+	private final Log log = LogFactory.getLogger("com.jaring.jom.mbean.util.MBeanUtility");
 	
 	HashMap<String, Object> utilityBelt = new HashMap<String, Object>(DEFAULT_UTILITIES_AVAILABLE);
 	

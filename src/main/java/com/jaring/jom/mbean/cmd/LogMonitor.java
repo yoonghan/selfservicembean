@@ -1,15 +1,15 @@
-package com.self.service.mbean.cmd;
+package com.jaring.jom.mbean.cmd;
 
 import org.jboss.system.ServiceMBeanSupport;
 
-import com.self.service.logging.impl.Log;
-import com.self.service.logging.log.LogFactory;
-import com.self.service.logging.monitor.LogMonitorService;
+import com.jaring.jom.logging.impl.Log;
+import com.jaring.jom.logging.log.LogFactory;
+import com.jaring.jom.logging.monitor.LogMonitorService;
 
 public class LogMonitor extends ServiceMBeanSupport
 	implements LogMonitorMBean {
 
-	private final Log log = LogFactory.getLogger("com.self.service.mbean.cmd.LogEmail");
+	private final Log log = LogFactory.getLogger("com.jaring.jom.mbean.cmd.LogEmail");
 	
 	private LogMonitorService logSchedule = LogMonitorService.getInstance();
 	

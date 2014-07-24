@@ -1,4 +1,4 @@
-package com.self.service.mbean.cmd;
+package com.jaring.jom.mbean.cmd;
 
 import org.jboss.system.ServiceMBean;
 

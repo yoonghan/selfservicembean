@@ -1,4 +1,4 @@
-package com.self.service.mbean.impl;
+package com.jaring.jom.mbean.impl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.Properties;
 class PropertyReader {
 
 	private final String PROPERTY_FILENAME="/mbean.properties";
-	private final String CLASS_LOCATION="com.self.service.mbean.cmd.PropertyReader";
+	private final String CLASS_LOCATION="com.jaring.jom.mbean.cmd.PropertyReader";
 	private Properties propFile;
 	
 	public PropertyReader(){
