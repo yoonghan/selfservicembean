@@ -60,11 +60,6 @@ public class CacheRefresh extends ServiceMBeanSupport
    	{
 		log.info("Ending refresher");
    	}
-	
-	public void destroy(){
-		DBCache.INSTANCE.getCategory().stopRecordRefresher();
-		DBCache.INSTANCE.getTag().stopRecordRefresher();
-	}
 
 	@Override
 	public void refreshMenu() {
